@@ -125,9 +125,9 @@ function parseFilesCoverage(report, source, files, threshold) {
     core.info(`${files}`);
     const coverages = files === null || files === void 0 ? void 0 : files.map(file => {
         core.info(`file: ${file}`);
-        const fileName = file.replace(/.*\/site-packages\/(\w+)/g, "Python/$1").replace(/\//g, '\\/');
+        const fileName = file.replace(/Python\//, '').replace(/\//g, '\\/');
         core.info(`filename: ${fileName}`);
-        const regex = new RegExp(`.*filename="${fileName}".*line-rate="(?<cover>[0-9]+[.]*[0-9]*)".*`);
+        const regex = new RegExp(`.*filename=".*/${fileName}".*line-rate="(?<cover>[0-9]+[.]*[0-9]*)".*`);
         const match = report.match(regex);
         const cover = (match === null || match === void 0 ? void 0 : match.groups) ? parseFloat(match.groups['cover']) : -1;
         return { file, cover, pass: cover >= threshold };
