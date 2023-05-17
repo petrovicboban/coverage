@@ -239,7 +239,7 @@ exports.formatFilesTable = formatFilesTable;
 function formatAverageTable(cover) {
     const averageIndicator = passOrFailIndicator(cover.pass);
     const coverTable = (0, markdown_table_1.markdownTable)([
-        ['Lines', 'Covered', 'Coverage', 'Threshold', 'Status'],
+        ['Statements', 'Covered', 'Coverage', 'Threshold', 'Status'],
         [`${cover.total}`, `${cover.covered}`, toPercent(cover.ratio), toPercent(cover.threshold), averageIndicator]
     ], { align: ['c', 'c', 'c', 'c', 'c'] });
     return { coverTable, pass: cover.pass };
@@ -466,8 +466,7 @@ function scorePr(filesCover) {
         core.info('No covered modified files in this PR ');
     }
     const sha = (_c = github_1.context.payload.pull_request) === null || _c === void 0 ? void 0 : _c.head.sha.slice(0, 7);
-    const action = '[action](https://github.com/marketplace/actions/python-coverage)';
-    message = message.concat(`\n\n\n> **updated for commit: \`${sha}\` by ${action}🐍**`);
+    message = message.concat(`\n\n\n> **updated for commit: \`${sha}\``);
     message = `\n> current status: ${passOverall ? '✅' : '❌'}`.concat(message);
     publishMessage(github_1.context.issue.number, message);
     core.endGroup();

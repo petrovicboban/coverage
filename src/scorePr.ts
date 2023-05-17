@@ -66,8 +66,7 @@ export function scorePr(filesCover: FilesCoverage): boolean {
     core.info('No covered modified files in this PR ')
   }
   const sha = context.payload.pull_request?.head.sha.slice(0, 7)
-  const action = '[action](https://github.com/marketplace/actions/python-coverage)'
-  message = message.concat(`\n\n\n> **updated for commit: \`${sha}\` by ${action}🐍**`)
+  message = message.concat(`\n\n\n> **updated for commit: \`${sha}\``)
   message = `\n> current status: ${passOverall ? '✅' : '❌'}`.concat(message)
   publishMessage(context.issue.number, message)
   core.endGroup()
